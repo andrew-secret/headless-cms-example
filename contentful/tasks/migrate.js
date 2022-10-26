@@ -1,0 +1,1 @@
+require('../contentful-migration').migrate()
