@@ -1,6 +1,6 @@
-import styles from './typography.module.css';
+import styles from './typography.module.css'
 
-export const Typography = ({
+function Typography({
   variant = 'body',
   level,
   color = 'darkblue',
@@ -8,7 +8,7 @@ export const Typography = ({
   children,
   className,
   ...props
-}) => {
+}) {
   const colorClasses = [
     color === 'darkblue' && 'text-cap-darkblue',
     color === 'lightblue' && 'text-cap-lightblue',
@@ -18,21 +18,11 @@ export const Typography = ({
     color === 'black' && 'text-black',
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(' ')
 
-  const heading1Classes = [
-    'font-extrabold',
-    'text-xl lg:text-2xl',
-    'uppercase',
-    'tracking-wide',
-  ].join(' ');
+  const heading1Classes = ['font-extrabold', 'text-xl lg:text-2xl', 'uppercase', 'tracking-wide'].join(' ')
 
-  const heading2Classes = [
-    'font-extrabold',
-    'text-2xl lg:text-4xl',
-    'uppercase',
-    'tracking-wide',
-  ].join(' ');
+  const heading2Classes = ['font-extrabold', 'text-2xl lg:text-4xl', 'uppercase', 'tracking-wide'].join(' ')
 
   const titleClasses = [
     'font-extrabold',
@@ -42,13 +32,11 @@ export const Typography = ({
     'uppercase',
     'tracking-wide',
     'leading-none',
-  ].join(' ');
+  ].join(' ')
 
-  const bodyClasses = ['font-medium', 'text-xl'].join(' ');
-  const bodySmallClasses = ['font-medium', 'text-base', 'leading-relaxed'].join(
-    ' '
-  );
-  const bodyTinyClasses = ['font-medium', 'text-sm'].join(' ');
+  const bodyClasses = ['font-medium', 'text-xl'].join(' ')
+  const bodySmallClasses = ['font-medium', 'text-base', 'leading-relaxed'].join(' ')
+  const bodyTinyClasses = ['font-medium', 'text-sm'].join(' ')
 
   const alignmentClasses = [
     alignment === 'left' && 'text-left',
@@ -56,7 +44,7 @@ export const Typography = ({
     alignment === 'center' && 'text-center',
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(' ')
 
   const classes = [
     styles.typography,
@@ -72,7 +60,7 @@ export const Typography = ({
     className,
   ]
     .filter(Boolean)
-    .join(' ');
+    .join(' ')
 
   const levelMapping = {
     h1: 'h1',
@@ -81,7 +69,7 @@ export const Typography = ({
     p: 'p',
     span: 'span',
     abbr: 'abbr',
-  };
+  }
 
   const variantsMapping = {
     title: level ? levelMapping[level] : 'h1',
@@ -91,15 +79,16 @@ export const Typography = ({
     body: level ? levelMapping[level] : 'p',
     bodySmall: level ? levelMapping[level] : 'p',
     bodyTiny: level ? levelMapping[level] : 'p',
-  };
+  }
 
-  const Component = variant ? variantsMapping[variant] : 'p';
+  const Component = variant ? variantsMapping[variant] : 'p'
 
   return (
-    <>
-      <Component className={classes} {...props}>
-        {children}
-      </Component>
-    </>
-  );
-};
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Component className={classes} {...props}>
+      {children}
+    </Component>
+  )
+}
+
+export { Typography }
