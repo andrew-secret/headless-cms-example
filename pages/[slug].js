@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable no-underscore-dangle */
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import ErrorPage from 'next/error'
@@ -7,7 +9,7 @@ import { getAllPagesWithSlug, getPageBySlug } from '../lib/api'
 export default function Page({ page }) {
   const router = useRouter()
 
-  if (!router.isFallback && !page) {
+  if (!router.isFallback && !page[0]) {
     return <ErrorPage statusCode={404} />
   }
 
@@ -20,7 +22,7 @@ export default function Page({ page }) {
       <Head>
         <title>Next.js Website Example with Contentful</title>
       </Head>
-      {page[0].contentCollection.items.map((item, key) => (
+      {page[0].contentCollection.items.map((item) => (
         <>
           {item.__typename === 'Block' && (
             <div>
@@ -39,9 +41,11 @@ export default function Page({ page }) {
 
 export async function getStaticPaths() {
   const allPages = await getAllPagesWithSlug()
+  const paths = allPages.map(({ slug }) => ({ params: { slug } })).filter((item) => item.params.slug !== '/')
+
   return {
-    paths: allPages.map(({ slug }) => ({ params: { slug } })),
-    fallback: true,
+    paths,
+    fallback: false,
   }
 }
 
