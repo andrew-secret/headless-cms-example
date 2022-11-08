@@ -11,6 +11,6 @@ const config = {
     environmentId: process.env.CONTENTFUL_ENVIRONMENT,
     accessToken: process.env.CONTENTFUL_MANAGEMENT_ACCESS_TOKEN,
   },
-};
+}
 
 module.exports = config
